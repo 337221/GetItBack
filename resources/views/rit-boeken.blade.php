@@ -1,4 +1,4 @@
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxRPbTZ0WLiuiGtYotKin_yvaYG6js92E&libraries=places&callback=initAutocomplete" async defer></script> -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=XD&libraries=places&callback=initAutocomplete" async defer></script> -->
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
