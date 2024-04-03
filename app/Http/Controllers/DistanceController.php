@@ -22,26 +22,26 @@ class DistanceController extends Controller
         $response = Http::get("https://maps.googleapis.com/maps/api/distancematrix/json", [
             'origins' => $start,
             'destinations' => $end,
-            'units' => 'km',
+            'units' => 'metric',
             'language' => 'nl',
             'key' => $apiKey,
         ]);
     
         if ($response->successful()) {
             $data = $response->json();
-            if ($data['rows'][0]['elements'][0]['status'] == 'ZERO_RESULTS') {
-                return back()->withErrors('Er kon geen route worden gevonden tussen de opgegeven locaties.');
+            $element = $data['rows'][0]['elements'][0];
+            if ($element['status'] == 'ZERO_RESULTS' || $element['status'] == 'NOT_FOUND') {
+                return back()->withErrors('Er kon geen route worden gevonden tussen de opgegeven locaties. Voer geldige locaties in.');
             }
     
-            $distanceValue = $data['rows'][0]['elements'][0]['distance']['value'] / 1000;
-    
-            $duration = $data['rows'][0]['elements'][0]['duration']['text'];
+            $distanceValue = $element['distance']['value'] / 1000;
+            $duration = $element['duration']['text'];
             $pricePerKm = Setting::where('key', 'price_per_km')->value('value');
             $totalPrice = $distanceValue * $pricePerKm;
     
             return back()->with('result', "Afstand: $distanceValue km, Tijdsduur: $duration, Prijs: €$totalPrice");
         } else {
-            return back()->withErrors('Kan de afstand niet berekenen. Voer een geldig adres in.');
+            return back()->withErrors('Er is iets fout gegaan bij het berekenen van de afstand. Probeer het later opnieuw.');
         }
     }
       
