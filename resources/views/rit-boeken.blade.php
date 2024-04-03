@@ -1,3 +1,4 @@
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxRPbTZ0WLiuiGtYotKin_yvaYG6js92E&libraries=places&callback=initAutocomplete" async defer></script> -->
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -12,21 +13,53 @@
                     <form action="{{ route('calculate-distance') }}" method="POST">
                         @csrf
                         <label for="start">Start Adres:</label>
-                        <input type="text" id="start" name="start" required class="mt-1 block w-full" style="color: black;"><br>
-                        <label for="end">Eind Adres:</label>
-                        <input type="text" id="end" name="end" required class="mt-1 block w-full" style="color: black;"><br><br>
+                        <br>
+                        <input id="start_address" name="start" type="text" required style="color: black;">
+                        <br><br>
+                        <label for="start">Eind Adres:</label>
+                        <br>
+                        <input id="end_address" name="end" type="text" required style="color: black;">
+                        <br><br>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Bereken Afstand
+                            Boek Rit
                         </button>
                     </form>
-                    @if (session('result'))
+
+                    @if (session('distance'))
                         <div class="mt-4">
-                            <strong>Resultaat:</strong> {{ session('result') }}
+                            <p>Afstand: {{ session('distance') }} km</p>
+                            <p>Tijdsduur: {{ session('duration') }}</p>
+                            <p>Prijs: €{{ session('price') }}</p>
+
+                            <form action="{{ route('book-ride') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="start" value="{{ session('start') }}">
+                                <input type="hidden" name="end" value="{{ session('end') }}">
+                                <input type="hidden" name="distance" value="{{ session('distance') }}">
+                                <input type="hidden" name="duration" value="{{ session('duration') }}">
+                                <input type="hidden" name="price" value="{{ session('price') }}">
+                                <br>
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Bevestig rit
+                                </button>
+                                
+                            </form>
                         </div>
                     @endif
+
+                    @if (session('success'))
+                        <div class="alert alert-success mt-4">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     @if ($errors->any())
-                        <div class="mt-4 text-red-500">
-                            <strong>Fout:</strong> {{ $errors->first() }}
+                        <div class="alert alert-danger mt-4">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
                 </div>
@@ -34,3 +67,29 @@
         </div>
     </div>
 </x-app-layout>
+<!-- <script>
+    function initAutocomplete() {
+        const startAutocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('start_address'),
+            { types: ['geocode'] }
+        );
+
+        const endAutocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('end_address'),
+            { types: ['geocode'] }
+        );
+
+        startAutocomplete.setFields(['address_component']);
+        endAutocomplete.setFields(['address_component']);
+
+        startAutocomplete.addListener('place_changed', function() {
+            const place = startAutocomplete.getPlace();
+            console.log(place);
+        });
+
+        endAutocomplete.addListener('place_changed', function() {
+            const place = endAutocomplete.getPlace();
+            console.log(place);
+        });
+    }
+</script> -->

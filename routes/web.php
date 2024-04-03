@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/rit-boeken', [DistanceController::class, 'index'])->name('rit-boeken');
     Route::post('/calculate-distance', [DistanceController::class, 'calculate'])->name('calculate-distance');
+    Route::post('/book-ride', [DistanceController::class, 'bookRide'])->name('book-ride');
 });
 
 /*
