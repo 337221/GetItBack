@@ -18,19 +18,19 @@
                                 <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Distance (km)</th>
                                 <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Duration</th>
                                 <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Price (€)</th>
+                                <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white">
                             @foreach ($bookings as $booking)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->user_id }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->start_address }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->end_address }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->distance }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->duration }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->price }}</td>
-                                </tr>
-                                <td>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->user_id }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->start_address }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->end_address }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->distance }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->duration }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->price }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <form action="{{ route('admin.update-booking-status', $booking) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
@@ -41,6 +41,7 @@
                                         </select>
                                     </form>
                                 </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
