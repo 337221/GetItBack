@@ -16,9 +16,15 @@
                     <x-nav-link :href="url('/admin/dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Admin Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="url('/admin/reservations')" :active="request()->routeIs('admin.reservations')">
+                        {{ __('Admin reservations') }}
+                    </x-nav-link>
                     @endif
                     <x-nav-link :href="url('/book-a-ride')" :active="request()->routeIs('book-a-ride')">
                         {{ __('Book a Ride') }}
+                    </x-nav-link>
+                    <x-nav-link :href="url('/ride-history')" :active="request()->routeIs('ride-history')">
+                        {{ __('Ride History') }}
                     </x-nav-link>
                 </div>
             </div>

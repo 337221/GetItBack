@@ -73,5 +73,10 @@ class DistanceController extends Controller
     
         return back()->with('success', 'Your ride has been booked successfully!');
     }
-    
+
+    public function rideHistory()
+    {
+        $userBookings = RideBooking::where('user_id', auth()->id())->get();
+        return view('ride-history', compact('userBookings'));
+    }
 }

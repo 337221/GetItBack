@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Setting;
+use App\Models\RideBooking;
 
 class AdminController extends Controller
 {
@@ -23,5 +24,10 @@ class AdminController extends Controller
         Setting::updateOrCreate(['key' => 'price_per_km'], ['value' => $request->price_per_km]);
     
         return back()->with('success', 'Prijs per kilometer succesvol bijgewerkt.');
+    }
+
+    public function reservations() {
+        $bookings = RideBooking::all();
+        return view('admin.reservations', compact('bookings'));
     }
 }

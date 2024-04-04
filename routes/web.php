@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/book-a-ride', [DistanceController::class, 'index'])->name('book-a-ride');
     Route::post('/calculate-distance', [DistanceController::class, 'calculate'])->name('calculate-distance');
     Route::post('/book-ride', [DistanceController::class, 'bookRide'])->name('book-ride');
+    Route::get('/ride-history', [DistanceController::class, 'rideHistory'])->name('ride-history');
 });
 
 /*
@@ -47,6 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/update-price', [AdminController::class, 'updatePricePerKilometer'])->name('admin.update-price');
+    Route::get('/admin/reservations', [AdminController::class, 'reservations'])->name('admin.reservations');
 });
 
 require __DIR__.'/auth.php';

@@ -11,13 +11,14 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
 
-                    <!-- Navigation Links -->
                     <div class="mt-4">
                         @if (auth()->user()->is_admin)
                             <a href="{{ url('/admin/dashboard') }}" class="text-lg text-blue-500 hover:text-blue-700">Go to Admin Dashboard</a><br>
+                            <a href="{{ url('/admin/reservations') }}" class="text-lg text-blue-500 hover:text-blue-700">View Admin Reservations</a><br>
                         @endif
 
-                        <a href="{{ url('/book-a-ride') }}" class="text-lg text-blue-500 hover:text-blue-700">Book a Ride</a>
+                        <a href="{{ url('/book-a-ride') }}" class="text-lg text-blue-500 hover:text-blue-700">Book a Ride</a><br>
+                        <a href="{{ url('/ride-history') }}" class="text-lg text-blue-500 hover:text-blue-700">View Ride History</a>
                     </div>
                 </div>
             </div>
