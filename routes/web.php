@@ -37,6 +37,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/calculate-distance', [DistanceController::class, 'calculate'])->name('calculate-distance');
     Route::post('/book-ride', [DistanceController::class, 'bookRide'])->name('book-ride');
     Route::get('/ride-history', [DistanceController::class, 'rideHistory'])->name('ride-history');
+    Route::get('/export-ride-history-pdf', [DistanceController::class, 'exportRideHistoryToPDF'])->name('export-ride-history-pdf');
+    Route::get('/send-ride-history-email', [DistanceController::class, 'sendRideHistoryToEmail'])->name('send-ride-history-email');
 });
 
 /*

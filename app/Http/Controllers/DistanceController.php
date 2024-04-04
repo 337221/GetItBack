@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Setting;
 use App\Models\RideBooking;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendRideHistory;
+use \PDF;
 
 class DistanceController extends Controller
 {
@@ -79,4 +82,20 @@ class DistanceController extends Controller
         $userBookings = RideBooking::where('user_id', auth()->id())->get();
         return view('ride-history', compact('userBookings'));
     }
+    
+    public function exportRideHistoryToPDF()
+    {
+        $userBookings = RideBooking::where('user_id', auth()->id())->get();
+        $pdf = PDF::loadView('ride-history-pdf', compact('userBookings'));
+        return $pdf->download('ride-history.pdf');
+    }
+    
+    public function sendRideHistoryToEmail()
+    {
+        $userBookings = RideBooking::where('user_id', auth()->id())->get();
+        Mail::to(auth()->user()->email)->send(new SendRideHistory($userBookings));
+    
+        return back()->with('success', 'Your ride history has been sent to your email.');
+    }
+    
 }

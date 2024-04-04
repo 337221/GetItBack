@@ -32,6 +32,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <a href="{{ route('export-ride-history-pdf') }}" class="btn btn-primary">Export Ride History To PDF</a>
+                    <br>
+                    <a href="{{ route('send-ride-history-email') }}" class="btn btn-primary">Send Ride History To Email</a>
                 </div>
             </div>
         </div>
