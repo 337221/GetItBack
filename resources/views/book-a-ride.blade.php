@@ -1,8 +1,8 @@
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=XD&libraries=places&callback=initAutocomplete" async defer></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZCBsV-n_j2uePRBhoRQEWS7292rciQ-4&libraries=places&callback=initAutocomplete" async defer></script>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Rit Boeken') }}
+            {{ __('Book a Ride') }}
         </h2>
     </x-slot>
 
@@ -12,24 +12,24 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('calculate-distance') }}" method="POST">
                         @csrf
-                        <label for="start">Start Adres:</label>
+                        <label for="start">Start Location:</label>
                         <br>
                         <input id="start_address" name="start" type="text" required style="color: black;">
                         <br><br>
-                        <label for="start">Eind Adres:</label>
+                        <label for="start">Destination:</label>
                         <br>
                         <input id="end_address" name="end" type="text" required style="color: black;">
                         <br><br>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Boek Rit
+                            Book a Ride
                         </button>
                     </form>
 
                     @if (session('distance'))
                         <div class="mt-4">
-                            <p>Afstand: {{ session('distance') }} km</p>
-                            <p>Tijdsduur: {{ session('duration') }}</p>
-                            <p>Prijs: €{{ session('price') }}</p>
+                            <p>Distance: {{ session('distance') }} km</p>
+                            <p>Duration: {{ session('duration') }}</p>
+                            <p>Price: €{{ session('price') }}</p>
 
                             <form action="{{ route('book-ride') }}" method="POST">
                                 @csrf
@@ -40,7 +40,7 @@
                                 <input type="hidden" name="price" value="{{ session('price') }}">
                                 <br>
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                    Bevestig rit
+                                    Confirm Ride
                                 </button>
                                 
                             </form>
@@ -67,7 +67,7 @@
         </div>
     </div>
 </x-app-layout>
-<!-- <script>
+<script>
     function initAutocomplete() {
         const startAutocomplete = new google.maps.places.Autocomplete(
             document.getElementById('start_address'),
@@ -92,4 +92,4 @@
             console.log(place);
         });
     }
-</script> -->
+</script>

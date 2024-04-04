@@ -11,7 +11,7 @@ class DistanceController extends Controller
 {
     public function index()
     {
-        return view('rit-boeken');
+        return view('book-a-ride');
     }
 
     public function calculate(Request $request)
@@ -24,7 +24,7 @@ class DistanceController extends Controller
             'origins' => $start,
             'destinations' => $end,
             'units' => 'metric',
-            'language' => 'nl',
+            'language' => 'en',
             'key' => $apiKey,
         ]);
     
@@ -32,7 +32,7 @@ class DistanceController extends Controller
             $data = $response->json();
             $element = $data['rows'][0]['elements'][0];
             if ($element['status'] == 'ZERO_RESULTS' || $element['status'] == 'NOT_FOUND') {
-                return back()->withErrors('Er kon geen route worden gevonden tussen de opgegeven locaties. Voer geldige locaties in.');
+                return back()->withErrors('No route could be found between the specified locations. Please enter valid locations.');
             }
     
             $distanceValue = $data['rows'][0]['elements'][0]['distance']['value'] / 1000;
@@ -48,7 +48,7 @@ class DistanceController extends Controller
                 'price' => $totalPrice,
             ]);
         } else {
-            return back()->withErrors('Kan de afstand niet berekenen. Voer een geldig adres in.');
+            return back()->withErrors('Cannot calculate distance. Please enter a valid address.');
         }
     }
 
@@ -71,7 +71,7 @@ class DistanceController extends Controller
         $booking->price = $validated['price'];
         $booking->save();
     
-        return back()->with('success', 'Uw rit is succesvol geboekt.');
+        return back()->with('success', 'Your ride has been booked successfully!');
     }
     
 }

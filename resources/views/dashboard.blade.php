@@ -17,7 +17,7 @@
                             <a href="{{ url('/admin/dashboard') }}" class="text-lg text-blue-500 hover:text-blue-700">Go to Admin Dashboard</a><br>
                         @endif
 
-                        <a href="{{ url('/rit-boeken') }}" class="text-lg text-blue-500 hover:text-blue-700">Go to Rit Boeken</a>
+                        <a href="{{ url('/book-a-ride') }}" class="text-lg text-blue-500 hover:text-blue-700">Book a Ride</a>
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/rit-boeken', [DistanceController::class, 'index'])->name('rit-boeken');
+    Route::get('/book-a-ride', [DistanceController::class, 'index'])->name('book-a-ride');
     Route::post('/calculate-distance', [DistanceController::class, 'calculate'])->name('calculate-distance');
     Route::post('/book-ride', [DistanceController::class, 'bookRide'])->name('book-ride');
 });
