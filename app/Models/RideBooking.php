@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class RideBooking extends Model
 {
     use HasFactory;
+
+    protected $table = 'ride_bookings';
+
+    protected $fillable = [
+        'user_id', 
+        'start_address', 
+        'end_address', 
+        'distance', 
+        'duration', 
+        'price', 
+        'status',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

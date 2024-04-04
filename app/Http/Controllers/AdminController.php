@@ -26,6 +26,17 @@ class AdminController extends Controller
         return back()->with('success', 'Prijs per kilometer succesvol bijgewerkt.');
     }
 
+    public function updateBookingStatus(Request $request, RideBooking $booking)
+    {
+        $request->validate([
+            'status' => 'required|in:In afwachting,Onderweg,Afgerond',
+        ]);
+
+        $booking->update(['status' => $request->status]);
+
+        return back()->with('success', 'Status updated successfully.');
+    }
+
     public function reservations() {
         $bookings = RideBooking::all();
         return view('admin.reservations', compact('bookings'));

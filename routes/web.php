@@ -48,6 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/update-price', [AdminController::class, 'updatePricePerKilometer'])->name('admin.update-price');
+    Route::patch('/admin/bookings/{booking}/status', [AdminController::class, 'updateBookingStatus'])->name('admin.update-booking-status');
     Route::get('/admin/reservations', [AdminController::class, 'reservations'])->name('admin.reservations');
 });
 

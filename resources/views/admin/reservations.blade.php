@@ -30,6 +30,17 @@
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->duration }}</td>
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $booking->price }}</td>
                                 </tr>
+                                <td>
+                                    <form action="{{ route('admin.update-booking-status', $booking) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="In afwachting" @if ($booking->status == 'In afwachting') selected @endif>In afwachting</option>
+                                            <option value="Onderweg" @if ($booking->status == 'Onderweg') selected @endif>Onderweg</option>
+                                            <option value="Afgerond" @if ($booking->status == 'Afgerond') selected @endif>Afgerond</option>
+                                        </select>
+                                    </form>
+                                </td>
                             @endforeach
                         </tbody>
                     </table>
